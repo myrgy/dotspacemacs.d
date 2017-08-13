@@ -78,13 +78,22 @@
     :ensure company
     :config
     (progn
-      (require 'company-rtags)
-      (add-to-list 'company-backends 'company-rtags)
-      (setq company-rtags-begin-after-member-access t)
+      (use-package company-rtags
+        :config
+        (progn
+          (add-to-list 'company-backends 'company-rtags)
+          (setq company-rtags-begin-after-member-access t)
+          )
+        )
 
-      (require 'rtags-ac)
-      (setq rtags-completions-enabled t)
-      (rtags-diagnostics)
+
+      (use-package rtags-ac
+        :config
+        (progn
+          (setq rtags-completions-enabled t)
+          (rtags-diagnostics)
+          )
+        )
 
       (define-key evil-normal-state-map (kbd "RET") 'rtags-select-other-window)
       (define-key evil-normal-state-map (kbd "M-RET") 'rtags-select)
@@ -101,6 +110,7 @@
   (use-package cmake-ide
    :config
    (progn
+     (setq cmake-ide-rdm-rc-path rtags-install-path)
      (cmake-ide-setup)
     )
    )
