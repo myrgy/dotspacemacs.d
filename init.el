@@ -38,10 +38,13 @@ This function should only modify configuration layer settings."
      helm
      auto-completion
      ;; better-defaults
+     semantic
      emacs-lisp
      git
-     ;; markdown
-     ;; org
+     gtags
+     markdown
+     javascript
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -340,6 +343,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file)
+  (setq global-semantic-decoration-mode t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -352,3 +358,5 @@ before packages are loaded."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+)
