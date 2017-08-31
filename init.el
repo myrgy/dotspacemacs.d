@@ -45,9 +45,9 @@ This function should only modify configuration layer settings."
      markdown
      javascript
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
@@ -345,7 +345,6 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
-  (setq global-semantic-decoration-mode t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -354,6 +353,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq global-semantic-decoration-mode t)
+  (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
