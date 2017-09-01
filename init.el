@@ -53,6 +53,7 @@ This function should only modify configuration layer settings."
      version-control
      (c-c++ :variables
             c-c++-enable-rtags-support t
+            c-c++-enable-clang-support t
             )
      )
    ;; List of additional packages that will be installed without being
@@ -345,7 +346,6 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
-  (setq global-semantic-decoration-mode t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -354,6 +354,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq global-semantic-decoration-mode t)
+  (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
