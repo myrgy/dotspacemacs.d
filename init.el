@@ -44,6 +44,7 @@ This function should only modify configuration layer settings."
      gtags
      markdown
      javascript
+     gpu
      org
      (shell :variables
             shell-default-height 30
@@ -356,7 +357,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq global-semantic-decoration-mode t)
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
-  )
+ )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
