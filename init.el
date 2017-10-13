@@ -61,7 +61,10 @@ This function should only modify configuration layer settings."
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode
             )
-     plantuml
+     (plantuml : variables
+               org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
+               )
+
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -363,6 +366,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq global-semantic-decoration-mode t)
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
+  (setq plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
