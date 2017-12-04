@@ -29,7 +29,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
+   '(csv
+     lua
      yaml
      python
      ruby
@@ -61,6 +62,7 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-enable-rtags-support t
             c-c++-enable-clang-support t
+            c-c++-enable-cmake-ide-support t
             c-c++-default-mode-for-headers 'c++-mode
             )
      (plantuml : variables
