@@ -34,6 +34,7 @@ This function should only modify configuration layer settings."
      yaml
      python
      ruby
+     rust
      go
      graphviz
      pdf-tools
