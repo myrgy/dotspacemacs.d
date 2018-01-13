@@ -46,7 +46,7 @@ This function should only modify configuration layer settings."
      helm
      auto-completion
      docker
-     ;; semantic
+     semantic
      emacs-lisp
      git
      gtags
@@ -80,7 +80,7 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(srefactor)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -384,13 +384,13 @@ before packages are loaded."
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
-  (setq which-function-mode t)
-  (setq mode-line-format (delete (assoc 'which-func-mode
-                                        mode-line-format) mode-line-format)
-        which-func-header-line-format '(which-func-mode ("" which-func-format)))
-  (defadvice which-func-ff-hook (after header-line activate)
-    (when which-func-mode
-      (setq mode-line-format (delete (assoc 'which-func-mode
-                                            mode-line-format) mode-line-format)
-            header-line-format which-func-header-line-format)))
+  ;; (setq which-function-mode t)
+  ;; (setq mode-line-format (delete (assoc 'which-func-mode
+  ;;                                       mode-line-format) mode-line-format)
+  ;;       which-func-header-line-format '(which-func-mode ("" which-func-format)))
+  ;; (defadvice which-func-ff-hook (after header-line activate)
+  ;;   (when which-func-mode
+  ;;     (setq mode-line-format (delete (assoc 'which-func-mode
+  ;;                                           mode-line-format) mode-line-format)
+  ;;           header-line-format which-func-header-line-format)))
 )
