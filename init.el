@@ -46,8 +46,7 @@ This function should only modify configuration layer settings."
      helm
      auto-completion
      docker
-     ;; better-defaults
-     semantic
+     ;; semantic
      emacs-lisp
      git
      gtags
@@ -67,10 +66,11 @@ This function should only modify configuration layer settings."
             c-c++-enable-cmake-ide-support t
             c-c++-default-mode-for-headers 'c++-mode
             )
+     cpp2
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-
+     neotree
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -384,4 +384,13 @@ before packages are loaded."
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
+  (setq which-function-mode t)
+  (setq mode-line-format (delete (assoc 'which-func-mode
+                                        mode-line-format) mode-line-format)
+        which-func-header-line-format '(which-func-mode ("" which-func-format)))
+  (defadvice which-func-ff-hook (after header-line activate)
+    (when which-func-mode
+      (setq mode-line-format (delete (assoc 'which-func-mode
+                                            mode-line-format) mode-line-format)
+            header-line-format which-func-header-line-format)))
 )
