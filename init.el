@@ -53,7 +53,7 @@ This function should only modify configuration layer settings."
      markdown
      javascript
      gpu
-     org
+     (org :variables org-projectile-file "TODOs.org")
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -80,7 +80,7 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(srefactor)
+   dotspacemacs-excluded-packages '(srefactor realgud)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -380,6 +380,10 @@ before packages are loaded."
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
  )
+
+(with-eval-after-load 'org-agenda
+  (require 'org-projectile)
+  (push (org-projectile:todo-files) org-agenda-files))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
