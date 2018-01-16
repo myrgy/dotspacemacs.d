@@ -44,11 +44,19 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-private-snippets-directory nil
+                      auto-completion-enable-snippets-in-popup t
+                      )
      docker
      semantic
      emacs-lisp
      git
+     github
      gtags
      markdown
      javascript
@@ -70,13 +78,16 @@ This function should only modify configuration layer settings."
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-     neotree
+     ;; neotree
+     treemacs
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      evil-string-inflection
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -379,11 +390,31 @@ before packages are loaded."
   (setq global-semantic-decoration-mode t)
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
+
+  (require 'evil-string-inflection)
+
+  (with-eval-after-load 'org-agenda
+    (require 'org-projectile)
+    (push (org-projectile:todo-files) org-agenda-files))
+
+  ;; Treemacs
+  ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
+  ;; TODO: add to ignore file predicates to ignore pyc files
+  (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
+  ;; (spacemacs/set-leader-keys "<escape>" 'treemacs-select-window)
+
+  (with-eval-after-load "treemacs"
+    (treemacs-map-icons-with-auto-mode-alist
+     '(".h")
+     '((c-mode . treemacs-icon-c)
+       (c++-mode . treemacs-icon-cpp)))
+    (treemacs-tag-follow-mode 1)
+    (treemacs-git-mode 'simple)
+    (add-to-list 'treemacs-ignored-file-predicates
+                 (lambda (file _)
+                   (string-match-p ".pyc\$" file))))
  )
 
-(with-eval-after-load 'org-agenda
-  (require 'org-projectile)
-  (push (org-projectile:todo-files) org-agenda-files))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
