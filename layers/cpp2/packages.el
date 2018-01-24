@@ -4,7 +4,6 @@
       '(
         gdb-mi
         modern-cpp-font-lock
-        (helm-ctest :require helm)
         ))
 
 (defun cpp2/init-gdb-mi ()
@@ -42,15 +41,6 @@
     :config
     (spacemacs|diminish modern-c++-font-lock-mode)
     ))
-
-(defun cpp2/init-helm-ctest()
-  (use-package helm-ctest
-    :config
-    (progn
-      (dolist (mode '(c-mode c++-mode))
-        (spacemacs/set-leader-keys-for-major-mode mode
-          "ct" 'helm-ctest)
-        ))))
 
 ;; (defun cpp2/which-func ()
 ;;   (which-function-mode t)
