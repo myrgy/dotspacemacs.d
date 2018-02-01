@@ -84,6 +84,8 @@ This function should only modify configuration layer settings."
                )
      ;; neotree
      treemacs
+     sr-speedbar
+     ycmd
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -417,6 +419,8 @@ before packages are loaded."
     (add-to-list 'treemacs-ignored-file-predicates
                  (lambda (file _)
                    (string-match-p ".pyc\$" file))))
+
+  (setq ycmd-server-command '("python" "/home/adalshov/Projects/github/ycmd/ycmd"))
  )
 
 
