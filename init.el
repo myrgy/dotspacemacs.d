@@ -395,7 +395,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq global-semantic-decoration-mode t)
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
-  (setq plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
+  (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
 
   (require 'evil-string-inflection)
 
@@ -420,7 +420,7 @@ before packages are loaded."
                  (lambda (file _)
                    (string-match-p ".pyc\$" file))))
 
-  (setq ycmd-server-command '("python" "/home/adalshov/Projects/github/ycmd/ycmd"))
+  (setq ycmd-server-command '("python" "~/.spacemacs.d/bin/ycmd/ycmd"))
  )
 
 
