@@ -417,7 +417,7 @@ before packages are loaded."
                  (lambda (file _)
                    (string-match-p ".pyc\$" file))))
 
-  (setq ycmd-server-command '("python" "~/.spacemacs.d/bin/ycmd/ycmd"))
+  (setq ycmd-server-command (list "python" (file-truename "~/.spacemacs.d/bin/ycmd/ycmd")))
  )
 
 
