@@ -1,9 +1,9 @@
 (defconst cquery-packages
   '(
-    evil
-    lsp-ui
+    ;; evil
+    ;; lsp-ui
     cquery
-    (company-lsp : requires cquery company projectile)
+    (company-lsp : requires cquery company)
     ))
 
 (defun my-code/post-init-evil ()
@@ -60,6 +60,20 @@
     (require 'projectile)
     (add-to-list 'projectile-globally-ignored-directories ".cquery_cached_index")
 
+    (defun cquery--get-root ()
+      "Return the root directory of a cquery project."
+      (expand-file-name (or (locate-dominating-file default-directory "compile_commands.json")
+                            (locate-dominating-file default-directory ".cquery")
+                            )
+                        (user-error "Could not find cquery project root")))
+
+
+    (dolist (mode '("c" "c++" "go" "haskell" "javascript" "python" "rust"))
+      (let ((handler (intern (format "spacemacs-jump-handlers-%s-mode" mode))))
+        (add-to-list handler 'lsp-ui-peek-find-definitions))
+      (let ((handler (intern (format "spacemacs-reference-handlers-%s-mode" mode))))
+        (add-to-list handler 'lsp-ui-peek-find-references)))
+
     (spacemacs/set-leader-keys-for-minor-mode 'lsp-mode
       "la" #'lsp-ui-find-workspace-symbol
       "lA" #'lsp-ui-peek-find-workspace-symbol
@@ -115,36 +129,10 @@
         "r" #'cquery/references-read
         "w" #'cquery/references-write
         ))
-
-    (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
-    (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
-    (define-key evil-motion-state-map (kbd "M-?") 'xref-find-references)
-    (define-key evil-motion-state-map (kbd "C-,") #'my-xref/find-references)
-    (define-key evil-motion-state-map (kbd "C-j") #'my-xref/find-definitions)
-
-    (add-to-list 'evil-emacs-state-modes 'xref--xref-buffer-mode)
-    (evil-define-key 'normal xref--xref-buffer-mode-map
-      "q" 'quit-window
-      "gj" 'xref-next-line
-      "gk" 'xref-prev-line
-      (kbd "C-j") 'xref-next-line
-      (kbd "C-k") 'xref-prev-line
-      "]" 'xref-next-line
-      "[" 'xref-prev-line
-      "r" 'xref-query-replace-in-results
-
-      ;; open
-      (kbd "<return>") 'xref-goto-xref
-      (kbd "S-<return>") 'xref-show-location-at-point
-      "o" 'xref-show-location-at-point ; TODO: Remove binding?
-      "go" 'xref-show-location-at-point)
-
-    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 ))
 
-(defun cquery/init-company-lsp ()
-  (use-package company-lsp))
+;; (defun cquery/init-company-lsp ()
+;;   (use-package company-lsp))
 
 (defun cquery/post-init-company-lsp ()
   (spacemacs|add-company-backends :backends company-lsp :modes c-mode-common))

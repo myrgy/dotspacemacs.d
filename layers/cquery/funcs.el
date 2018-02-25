@@ -1,42 +1,48 @@
 (require 'cl-lib)
-(require 'subr-x)
+;; (require 'subr-x)
+
 
 (defun cquery//enable ()
-  (when
-      (and buffer-file-name
-           (or (locate-dominating-file default-directory "compile_commands.json")
-               (locate-dominating-file default-directory ".cquery")))
-    (lsp-cquery-enable)))
+  (condition-case nil
+      (lsp-cquery-enable)
+    (user-error nil)))
+
+;; (defun cquery//enable ()
+;;   (when
+;;       (and buffer-file-name
+;;            (or (locate-dominating-file default-directory "compile_commands.json")
+;;                (locate-dominating-file default-directory ".cquery")))
+;;     (lsp-cquery-enable)))
 
 
 ;;; xref
 
-(defun my-xref/find-definitions ()
-  (interactive)
-  (if lsp-mode (lsp-ui-peek-find-definitions) (spacemacs/jump-to-definition)))
+;; (defun my-xref/find-definitions ()
+;;   (interactive)
+;;   (if lsp-mode (lsp-ui-peek-find-definitions) (spacemacs/jump-to-definition)))
 
-(defun my-xref/find-references ()
-  (interactive)
-  (if lsp-mode (lsp-ui-peek-find-references) (spacemacs/jump-to-definition)))
+;; (defun my-xref/find-references ()
+;;   (interactive)
+;;   (if lsp-mode (lsp-ui-peek-find-references) (spacemacs/jump-to-definition)))
 
-;;; Override
-;; This function is transitively called by xref-find-{definitions,references,apropos}
-(require 'xref)
-(defun xref--show-xrefs (xrefs display-action &optional always-show-list)
-  (cond
-   ((cl-some (lambda (x) (string-match-p x buffer-file-name))
-             my-xref-blacklist)
-    nil)
-   (t
-    ;; PATCH
-    (lsp-ui-peek--with-evil-jumps (evil-set-jump))
+;; ;;; Override
+;; ;; This function is transitively called by xref-find-{definitions,references,apropos}
+;; (require 'xref)
+;; (defun xref--show-xrefs (xrefs display-action &optional always-show-list)
+;;   (cond
+;;    ((cl-some (lambda (x) (string-match-p x buffer-file-name))
+;;              my-xref-blacklist)
+;;     nil)
+;;    (t
+;;     ;; PATCH
+;;     (lsp-ui-peek--with-evil-jumps (evil-set-jump))
 
-    ;; PATCH Jump to the first candidate
-    ;; (when (not (cdr xrefs))
-    ;; (xref--pop-to-location (car xrefs) display-action))
+;;     ;; PATCH Jump to the first candidate
+;;     ;; (when (not (cdr xrefs))
+;;     ;; (xref--pop-to-location (car xrefs) display-action))
 
-    (funcall xref-show-xrefs-function xrefs
-             `((window . ,(selected-window)))))))
+;;     (funcall xref-show-xrefs-function xrefs
+;;              `((window . ,(selected-window)))))))
 
 ;; https://github.com/syl20bnr/spacemacs/pull/9911
 
@@ -95,35 +101,46 @@ sets `spacemacs-reference-handlers' in buffers of that mode."
 
 ;; xref-find-apropos (workspace/symbol)
 
-(defun my/highlight-pattern-in-text (pattern line)
-  (when (> (length pattern) 0)
-    (let ((i 0))
-     (while (string-match pattern line i)
-       (setq i (match-end 0))
-       (add-face-text-property (match-beginning 0) (match-end 0) 'highlight t line)
-       )
-     line)))
+;; (defun my/highlight-pattern-in-text (pattern line)
+;;   (when (> (length pattern) 0)
+;;     (let ((i 0))
+;;      (while (string-match pattern line i)
+;;        (setq i (match-end 0))
+;;        (add-face-text-property (match-beginning 0) (match-end 0) 'highlight t line)
+;;        )
+;;      line)))
 
-(with-eval-after-load 'lsp-methods
-  ;;; Override
-  ;; This deviated from the original in that it highlights pattern appeared in symbol
-  (defun lsp--symbol-information-to-xref (pattern symbol)
-   "Return a `xref-item' from SYMBOL information."
-   (let* ((location (gethash "location" symbol))
-          (uri (gethash "uri" location))
-          (range (gethash "range" location))
-          (start (gethash "start" range))
-          (name (gethash "name" symbol)))
-     (xref-make (format "[%s] %s"
-                        (alist-get (gethash "kind" symbol) lsp--symbol-kind)
-                        (my/highlight-pattern-in-text (regexp-quote pattern) name))
-                (xref-make-file-location (string-remove-prefix "file://" uri)
-                                         (1+ (gethash "line" start))
-                                         (gethash "character" start)))))
+;; (with-eval-after-load 'lsp-methods
+;;   ;;; Override
+;;   ;; This deviated from the original in that it highlights pattern appeared in symbol
+;;   (defun lsp--symbol-information-to-xref (pattern symbol)
+;;    "Return a `xref-item' from SYMBOL information."
+;;    (let* ((location (gethash "location" symbol))
+;;           (uri (gethash "uri" location))
+;;           (range (gethash "range" location))
+;;           (start (gethash "start" range))
+;;           (name (gethash "name" symbol)))
+;;      (xref-make (format "[%s] %s"
+;;                         (alist-get (gethash "kind" symbol) lsp--symbol-kind)
+;;                         (my/highlight-pattern-in-text (regexp-quote pattern) name))
+;;                 (xref-make-file-location (string-remove-prefix "file://" uri)
+;;                                          (1+ (gethash "line" start))
+;;                                          (gethash "character" start)))))
 
-  (cl-defmethod xref-backend-apropos ((_backend (eql xref-lsp)) pattern)
-    (let ((symbols (lsp--send-request (lsp--make-request
-                                       "workspace/symbol"
-                                       `(:query ,pattern)))))
-      (mapcar (lambda (x) (lsp--symbol-information-to-xref pattern x)) symbols)))
-)
+;;   (cl-defmethod xref-backend-apropos ((_backend (eql xref-lsp)) pattern)
+;;     (let ((symbols (lsp--send-request (lsp--make-request
+;;                                        "workspace/symbol"
+;;                                        `(:query ,pattern)))))
+;;       (mapcar (lambda (x) (lsp--symbol-information-to-xref pattern x)) symbols)))
+;; )
+
+;; (defun* cquery--get-root ()
+;;   "Return the root directory of a cquery project."
+;;   (cl-loop for i in cquery-projects do
+;;            (when (string-prefix-p (expand-file-name i) buffer-file-name)
+;;              (return-from cquery--get-root i)
+;;              ))
+;;   (expand-file-name (or (locate-dominating-file default-directory "compile_commands.json")
+;;                         (locate-dominating-file default-directory ".cquery")
+;;                         (user-error "Could not find cquery project root")))
+;;   )

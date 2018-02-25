@@ -50,14 +50,14 @@ This function should only modify configuration layer settings."
                       auto-completion-complete-with-key-sequence nil
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-private-snippets-directory nil
-                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-snippets-in-popup nil
                       )
      docker
      semantic
      emacs-lisp
      git
      github
-     gtags
+     ;; gtags
      markdown
      javascript
      gpu
@@ -68,24 +68,26 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
-     (c-c++ :variables
-            c-c++-enable-rtags-support t
-            c-c++-enable-clang-support t
-            c-c++-default-mode-for-headers 'c++-mode
-            )
-     cpp2
+     ;; (c-c++ :variables
+     ;;        c-c++-enable-rtags-support t
+     ;;        c-c++-enable-clang-support t
+     ;;        c-c++-default-mode-for-headers 'c++-mode
+     ;;        )
+     (cpp2 :variables
+           c-c++-default-mode-for-headers 'c++-mode
+           )
 
-     (cmake :variables
-            cmake-enable-cmake-ide-support t
-            )
+     ;; (cmake :variables
+     ;;        cmake-enable-cmake-ide-support nil
+     ;;        )
 
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
      ;; neotree
      treemacs
-     sr-speedbar
-     ycmd
+     ;; sr-speedbar
+     ;; ycmd
      ;; vim-extra
      )
    ;; List of additional packages that will be installed without being
@@ -96,7 +98,7 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(srefactor realgud company-rtags)
+   dotspacemacs-excluded-packages '(srefactor realgud company-rtags company-clang)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -418,7 +420,14 @@ before packages are loaded."
                    (string-match-p ".pyc\$" file))))
 
   (setq ycmd-server-command (list "python" (file-truename "~/.spacemacs.d/bin/ycmd/ycmd")))
- )
+
+  (with-eval-after-load "disaster"
+    (add-hook 'disaster-find-build-root-functions
+              (lambda (root-path)
+                ;; nil
+                (concat (file-name-directory root-path) "build")
+                )))
+)
 
 
 ;; Do not write anything past this comment. This is where Emacs will
