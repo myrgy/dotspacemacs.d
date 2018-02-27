@@ -1,41 +1,33 @@
 (require 'cl-lib)
 
-;; (defun cquery//enable ()
-;;   (when
-;;       (and buffer-file-name
-;;            (or (locate-dominating-file default-directory "compile_commands.json")
-;;                (locate-dominating-file default-directory ".cquery")))
-;;     (lsp-cquery-enable)))
-
-
 ;;; xref
 
-;; (defun my-xref/find-definitions ()
-;;   (interactive)
-;;   (if lsp-mode (lsp-ui-peek-find-definitions) (spacemacs/jump-to-definition)))
+(defun my-xref/find-definitions ()
+  (interactive)
+  (if lsp-mode (lsp-ui-peek-find-definitions) (spacemacs/jump-to-definition)))
 
-;; (defun my-xref/find-references ()
-;;   (interactive)
-;;   (if lsp-mode (lsp-ui-peek-find-references) (spacemacs/jump-to-definition)))
+(defun my-xref/find-references ()
+  (interactive)
+  (if lsp-mode (lsp-ui-peek-find-references) (spacemacs/jump-to-definition)))
 
-;; ;;; Override
-;; ;; This function is transitively called by xref-find-{definitions,references,apropos}
-;; (require 'xref)
-;; (defun xref--show-xrefs (xrefs display-action &optional always-show-list)
-;;   (cond
-;;    ((cl-some (lambda (x) (string-match-p x buffer-file-name))
-;;              my-xref-blacklist)
-;;     nil)
-;;    (t
-;;     ;; PATCH
-;;     (lsp-ui-peek--with-evil-jumps (evil-set-jump))
+;;; Override
+;; This function is transitively called by xref-find-{definitions,references,apropos}
+(require 'xref)
+(defun xref--show-xrefs (xrefs display-action &optional always-show-list)
+  (cond
+   ((cl-some (lambda (x) (string-match-p x buffer-file-name))
+             my-xref-blacklist)
+    nil)
+   (t
+    ;; PATCH
+    (lsp-ui-peek--with-evil-jumps (evil-set-jump))
 
-;;     ;; PATCH Jump to the first candidate
-;;     ;; (when (not (cdr xrefs))
-;;     ;; (xref--pop-to-location (car xrefs) display-action))
+    ;; PATCH Jump to the first candidate
+    ;; (when (not (cdr xrefs))
+    ;; (xref--pop-to-location (car xrefs) display-action))
 
-;;     (funcall xref-show-xrefs-function xrefs
-;;              `((window . ,(selected-window)))))))
+    (funcall xref-show-xrefs-function xrefs
+             `((window . ,(selected-window)))))))
 
 ;; https://github.com/syl20bnr/spacemacs/pull/9911
 
@@ -126,14 +118,3 @@ sets `spacemacs-reference-handlers' in buffers of that mode."
 ;;                                        `(:query ,pattern)))))
 ;;       (mapcar (lambda (x) (lsp--symbol-information-to-xref pattern x)) symbols)))
 ;; )
-
-;; (defun* cquery--get-root ()
-;;   "Return the root directory of a cquery project."
-;;   (cl-loop for i in cquery-projects do
-;;            (when (string-prefix-p (expand-file-name i) buffer-file-name)
-;;              (return-from cquery--get-root i)
-;;              ))
-;;   (expand-file-name (or (locate-dominating-file default-directory "compile_commands.json")
-;;                         (locate-dominating-file default-directory ".cquery")
-;;                         (user-error "Could not find cquery project root")))
-;;   )

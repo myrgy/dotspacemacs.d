@@ -77,9 +77,9 @@ This function should only modify configuration layer settings."
            c-c++-default-mode-for-headers 'c++-mode
            )
 
-     ;; (cmake :variables
-     ;;        cmake-enable-cmake-ide-support nil
-     ;;        )
+     (cmake
+      ;; :variables cmake-enable-cmake-ide-support nil
+            )
 
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
