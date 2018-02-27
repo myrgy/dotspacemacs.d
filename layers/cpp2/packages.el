@@ -6,6 +6,8 @@
         gdb-mi
         ;; modern-cpp-font-lock
         clang-format
+        cquery
+        company-lsp
         ))
 
 (defun cpp2/init-cc-mode ()
@@ -70,8 +72,23 @@
     :init
     (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
     :config
-    (spacemacs|diminish modern-c++-font-lock-mode)
-    ))
+    (spacemacs|diminish modern-c++-font-lock-mode)))
+
+(defun cpp2/post-init-cquery ()
+  (with-eval-after-load 'cquery
+    (use-package helm-xref)
+    (setq cquery-sem-highlight-method 'overlay)
+    (cquery-use-default-rainbow-sem-highlight)
+    (setq cquery-extra-init-params
+          '(:cacheFormat "msgpack" :completion (:detailedLabel t) :xref (:container t))))
+
+  (with-eval-after-load 'projectile
+  ;; (spacemacs|use-package-add-hook projectile
+    ;; :post-config
+    (add-to-list 'projectile-globally-ignored-directories ".cquery_cached_index")))
+
+(defun cpp2/post-init-company-lsp ()
+  (spacemacs|add-company-backends :backends company-lsp :modes c-mode-common))
 
 ;; (defun cpp2/which-func ()
 ;;   (which-function-mode t)

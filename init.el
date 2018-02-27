@@ -61,7 +61,7 @@ This function should only modify configuration layer settings."
      markdown
      javascript
      gpu
-     (org :variables org-projectile-file "TODOs.org")
+     org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)

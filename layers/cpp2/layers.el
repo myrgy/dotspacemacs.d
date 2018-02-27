@@ -1,2 +1,1 @@
-
-(configuration-layer/declare-layer 'cquery)
+(configuration-layer/declare-layer 'cqueryex)

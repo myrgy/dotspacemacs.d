@@ -1,9 +1,3 @@
-;; See https://github.com/cquery-project/cquery/wiki/Initialization-options
-(defvar cquery-extra-init-params '(:cacheFormat "msgpack"))
-
-(defvar spacemacs-default-reference-handlers '(helm-gtags-find-rtag)
-  "List of reference handlers available in every mode.")
-
 (defvar-local spacemacs-reference-handlers '()
   "List of reference handlers local to this buffer.")
 

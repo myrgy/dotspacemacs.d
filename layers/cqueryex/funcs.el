@@ -1,11 +1,4 @@
 (require 'cl-lib)
-;; (require 'subr-x)
-
-
-(defun cquery//enable ()
-  (condition-case nil
-      (lsp-cquery-enable)
-    (user-error nil)))
 
 ;; (defun cquery//enable ()
 ;;   (when
