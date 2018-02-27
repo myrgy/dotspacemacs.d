@@ -61,8 +61,8 @@
 (setq company-quickhelp-delay 0)
 (setq company-show-numbers t)
 
-(advice-add 'spacemacs/jump-to-definition :before #'my-advice/xref-set-jump)
-(advice-add 'spacemacs/jump-to-reference :before #'my-advice/xref-set-jump)
+;; (advice-add 'spacemacs/jump-to-definition :before #'my-advice/xref-set-jump)
+;; (advice-add 'spacemacs/jump-to-reference :before #'my-advice/xref-set-jump)
 
 ;; ;; See also https://github.com/cquery-project/cquery/wiki/Emacs
 (defun cqueryex/post-init-cquery ()
@@ -120,9 +120,9 @@
       "lR" #'cquery-freshen-index
       "lv" #'cquery/vars
       "l SPC" #'cquery/random
-      "laa" #'cquery/references-address
-      "lar" #'cquery/references-read
-      "law" #'cquery/references-write
+      "lxa" #'cquery/references-address
+      "lxr" #'cquery/references-read
+      "lxw" #'cquery/references-write
       "lm" #'cquery-member-hierarchy
       ;; bases
       "li" #'cquery-inheritance-hierarchy

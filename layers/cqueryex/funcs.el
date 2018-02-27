@@ -1,6 +1,8 @@
 (require 'cl-lib)
 
 ;;; xref
+;; (defun my-advice/xref-set-jump (&optional args)
+;;   (lsp-ui-peek--with-evil-jumps (evil-set-jump)))
 
 (defun my-xref/find-definitions ()
   (interactive)
