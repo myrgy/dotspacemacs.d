@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup nil
                       )
      docker
-     semantic
+     ;; semantic
      emacs-lisp
      git
      github
@@ -85,8 +85,8 @@ This function should only modify configuration layer settings."
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-     ;; neotree
-     treemacs
+     neotree
+     ;; treemacs
      ;; sr-speedbar
      ;; ycmd
      ;; vim-extra
@@ -386,7 +386,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq custom-file (concat (file-name-directory dotspacemacs-filepath) "customize.el"))
-  (load custom-file)
+  ;; (load custom-file)
   )
 
 (defun dotspacemacs/user-config ()
@@ -395,39 +395,39 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq global-semantic-decoration-mode t)
+  ;; (setq global-semantic-decoration-mode t)
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
 
-  (with-eval-after-load 'org-agenda
-    (require 'org-projectile)
-    (push (org-projectile:todo-files) org-agenda-files))
+  ;; (with-eval-after-load 'org-agenda
+  ;;   (require 'org-projectile)
+  ;;   (push (org-projectile:todo-files) org-agenda-files))
 
-  ;; Treemacs
-  ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
-  ;; TODO: add to ignore file predicates to ignore pyc files
-  (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
-  ;; (spacemacs/set-leader-keys "<escape>" 'treemacs-select-window)
+  ;; ;; Treemacs
+  ;; ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
+  ;; ;; TODO: add to ignore file predicates to ignore pyc files
+  ;; (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
+  ;; ;; (spacemacs/set-leader-keys "<escape>" 'treemacs-select-window)
 
-  (with-eval-after-load "treemacs"
-    (treemacs-map-icons-with-auto-mode-alist
-     '(".h")
-     '((c-mode . treemacs-icon-c)
-       (c++-mode . treemacs-icon-cpp)))
-    (treemacs-tag-follow-mode 1)
-    (treemacs-git-mode 'simple)
-    (add-to-list 'treemacs-ignored-file-predicates
-                 (lambda (file _)
-                   (string-match-p ".pyc\$" file))))
+  ;; (with-eval-after-load "treemacs"
+  ;;   (treemacs-map-icons-with-auto-mode-alist
+  ;;    '(".h")
+  ;;    '((c-mode . treemacs-icon-c)
+  ;;      (c++-mode . treemacs-icon-cpp)))
+  ;;   (treemacs-tag-follow-mode 1)
+  ;;   (treemacs-git-mode 'simple)
+  ;;   (add-to-list 'treemacs-ignored-file-predicates
+  ;;                (lambda (file _)
+  ;;                  (string-match-p ".pyc\$" file))))
 
-  (setq ycmd-server-command (list "python" (file-truename "~/.spacemacs.d/bin/ycmd/ycmd")))
+  ;; (setq ycmd-server-command (list "python" (file-truename "~/.spacemacs.d/bin/ycmd/ycmd")))
 
-  (with-eval-after-load "disaster"
-    (add-hook 'disaster-find-build-root-functions
-              (lambda (root-path)
-                ;; nil
-                (concat (file-name-directory root-path) "build")
-                )))
+  ;; (with-eval-after-load "disaster"
+  ;;   (add-hook 'disaster-find-build-root-functions
+  ;;             (lambda (root-path)
+  ;;               ;; nil
+  ;;               (concat (file-name-directory root-path) "build")
+  ;;               )))
 )
 
 
