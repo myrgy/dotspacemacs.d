@@ -85,8 +85,8 @@ This function should only modify configuration layer settings."
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-     neotree
-     ;; treemacs
+     ;; neotree
+     treemacs
      ;; sr-speedbar
      ;; ycmd
      ;; vim-extra
@@ -399,7 +399,7 @@ before packages are loaded."
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
 
-  (setq projectile-switch-project-action #'projectile-dired)
+  ;; (setq projectile-switch-project-action #'projectile-dired)
 
   ;; (with-eval-after-load 'org-agenda
   ;;   (require 'org-projectile)
