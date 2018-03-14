@@ -39,7 +39,7 @@
   ;;   (lsp-ui-doc-mode 1))
   (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (lsp-ui-doc-enable -1)
+  ;; (lsp-ui-doc-enable -1)
   (lsp-enable-imenu)
   (setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
   (setq lsp-ui-sideline-show-symbol nil)  ; don't show symbol on the right of info
