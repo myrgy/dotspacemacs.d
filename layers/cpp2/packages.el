@@ -77,7 +77,7 @@
 (defun cpp2/post-init-cquery ()
   (with-eval-after-load 'cquery
     (use-package helm-xref)
-    (setq cquery-sem-highlight-method 'overlay)
+    (setq cquery-sem-highlight-method 'font-lock)
     (cquery-use-default-rainbow-sem-highlight)
     (setq cquery-extra-init-params
           '(:cacheFormat "msgpack" :completion (:detailedLabel t) :xref (:container t))))
