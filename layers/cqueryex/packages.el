@@ -90,6 +90,9 @@
     )
 
   (lsp-cquery-enable)
+  (evil-set-initial-state 'cquery-tree-mode 'emacs)
+  ;;evil-record-macro keybinding clobbers q in cquery-tree-mode-map for some reason?
+  (evil-make-overriding-map cquery-tree-mode-map)
 
   (defun cquery/base () (interactive) (lsp-ui-peek-find-custom 'base "$cquery/base"))
   (defun cquery/callers () (interactive) (lsp-ui-peek-find-custom 'callers "$cquery/callers"))

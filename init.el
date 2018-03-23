@@ -89,11 +89,12 @@ This function should only modify configuration layer settings."
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-     ;; neotree
-     treemacs
+     neotree
+     ;; treemacs
      ;; sr-speedbar
      ;; ycmd
      ;; vim-extra
+     mylayer
      )
 
    ;; List of additional packages that will be installed without being
@@ -226,7 +227,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 13.0
                                :weight normal
                                :width normal)
 
@@ -485,6 +486,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq-default evil-escape-key-sequence "jk")
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
   )
