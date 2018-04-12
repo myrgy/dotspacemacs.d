@@ -94,7 +94,6 @@ This function should only modify configuration layer settings."
      ;; sr-speedbar
      ;; ycmd
      ;; vim-extra
-     mylayer
      )
 
    ;; List of additional packages that will be installed without being
