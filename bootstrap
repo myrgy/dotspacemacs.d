@@ -1,6 +1,6 @@
 #!/bin/sh
-git clone --depth=1       git@github.com:Valloric/ycmd.git                          bin/ycmd
-
-cd bin/ycmd
-git submodule update --init --recursive
-python ./build.py --all
+#git clone --depth=1       git@github.com:Valloric/ycmd.git                          bin/ycmd
+#
+#cd bin/ycmd
+#git submodule update --init --recursive
+#python ./build.py --all
