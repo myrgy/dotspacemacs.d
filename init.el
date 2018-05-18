@@ -64,7 +64,8 @@ This function should only modify configuration layer settings."
      github
      ;; gtags
      markdown
-     javascript
+     ;; javascript
+     json
      gpu
      org
      (shell :variables
