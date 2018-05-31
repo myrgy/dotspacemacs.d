@@ -71,6 +71,9 @@
 ;; ;; See also https://github.com/cquery-project/cquery/wiki/Emacs
 (defun cqueryex/post-init-cquery ()
   (require 'cquery)
+  (setq company-transformers nil
+        company-lsp-async t
+        company-lsp-cache-candidates nil)
   ;; (with-eval-after-load 'cquery
   (dolist (mode '("c" "c++" "go" "haskell" "javascript" "python" "rust"))
     (let ((handler (intern (format "spacemacs-jump-handlers-%s-mode" mode))))
