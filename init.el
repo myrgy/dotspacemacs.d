@@ -90,8 +90,8 @@ This function should only modify configuration layer settings."
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-     neotree
-     ;; treemacs
+     ;; neotree
+     treemacs
      ;; sr-speedbar
      ;; ycmd
      ;; vim-extra
@@ -305,23 +305,6 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
-   ;; If non-nil, `helm' will try to minimize the space it uses. (default nil)
-   dotspacemacs-helm-resize nil
-
-   ;; if non-nil, the helm header is hidden when there is only one source.
-   ;; (default nil)
-   dotspacemacs-helm-no-header nil
-
-   ;; define the position to display `helm', options are `bottom', `top',
-   ;; `left', or `right'. (default 'bottom)
-   dotspacemacs-helm-position 'bottom
-
-   ;; Controls fuzzy matching in helm. If set to `always', force fuzzy matching
-   ;; in all non-asynchronous sources. If set to `source', preserve individual
-   ;; source settings. Else, disable fuzzy matching in all sources.
-   ;; (default 'always)
-   dotspacemacs-helm-use-fuzzy 'always
-
    ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
    ;; `p' several times cycles through the elements in the `kill-ring'.
    ;; (default nil)
@@ -489,6 +472,19 @@ before packages are loaded."
   (setq-default evil-escape-key-sequence "jk")
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
+
+  ;; Treemacs
+  ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
+  ;; TODO: add to ignore file predicates to ignore pyc files
+  (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
+  (spacemacs/set-leader-keys "<escape>" 'treemacs-select-window)
+
+  (custom-set-variables '(treemacs-indentation 1)
+                        '(treemacs-recenter-after-tag-follow t)
+                        '(treemacs-recenter-after-file-follow t)
+                        '(treemacs-follow-recenter-distance 0.2))
+
+  ;; (setq-default helm-display-function 'helm-default-display-buffer)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
