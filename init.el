@@ -473,6 +473,7 @@ before packages are loaded."
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
   (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
 
+  (custom-set-variables '(imenu-max-item-length 256))
   ;; Treemacs
   ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
   ;; TODO: add to ignore file predicates to ignore pyc files
