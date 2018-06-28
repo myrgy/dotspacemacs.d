@@ -3,8 +3,9 @@
 (setq cpp2-packages
       '(
         cc-mode
-        gdb-mi
+        ;; gdb-mi
         ;; modern-cpp-font-lock
+        gdb-gud
         clang-format
         cquery
         company-lsp
@@ -28,6 +29,28 @@
         (spacemacs/set-leader-keys-for-major-mode mode
           "ga" 'projectile-find-other-file
           "gA" 'projectile-find-other-file-other-window)))))
+
+(defun cpp2/init-gdb-gud ()
+  (progn
+    (setq gdb-many-windows t)
+
+    (defvar all-gud-modes
+      '(gud-mode comint-mode gdb-locals-mode gdb-frames-mode  gdb-breakpoints-mode)
+      "A list of modes when using gdb")
+    (defun kill-all-gud-buffers ()
+      "Kill all gud buffers including Debugger, Locals, Frames, Breakpoints.
+Do this after `q` in Debugger buffer."
+      (interactive)
+      (save-excursion
+        (let ((count 0))
+          (dolist (buffer (buffer-list))
+            (set-buffer buffer)
+            (when (member major-mode all-gud-modes)
+              (setq count (1+ count))
+              (kill-buffer buffer)
+              (delete-other-windows))) ;; fix the remaining two windows issue
+          (message "Killed %i buffer(s)." count))))
+    ))
 
 (defun cpp2/init-gdb-mi ()
   (use-package gdb-mi
