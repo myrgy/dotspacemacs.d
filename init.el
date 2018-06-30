@@ -493,6 +493,13 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (if (string= (system-name) "sr-macbook-503")
+      (setq-default dotspacemacs-default-font
+                    '("Source Code Pro"
+                      :size 10.0
+                      :weight normal
+                      :width normal
+                      :powerline-scale 1)))
   (setq custom-file (concat (file-name-directory dotspacemacs-filepath) "customize.el"))
   (load custom-file)
   )
