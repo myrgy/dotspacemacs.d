@@ -3,9 +3,9 @@
 (setq cpp2-packages
       '(
         cc-mode
-        ;; gdb-mi
+        gdb-mi
         ;; modern-cpp-font-lock
-        gdb-gud
+        ;; gdb-gud
         clang-format
         cquery
         company-lsp

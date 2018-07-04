@@ -75,14 +75,14 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
-     ;; (c-c++ :variables
-     ;;        c-c++-enable-rtags-support t
-     ;;        c-c++-enable-clang-support t
-     ;;        c-c++-default-mode-for-headers 'c++-mode
-     ;;        )
-     (cpp2 :variables
-           c-c++-default-mode-for-headers 'c++-mode
-           )
+     (c-c++ :variables
+            c-c++-enable-clang-support t
+            c-c++-default-mode-for-headers 'c++-mode
+            )
+     cquery
+     ;; (cpp2 :variables
+     ;;       c-c++-default-mode-for-headers 'c++-mode
+     ;;       )
 
      (cmake
       ;; :variables cmake-enable-cmake-ide-support nil
