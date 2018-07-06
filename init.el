@@ -34,6 +34,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     shell-scripts
      sql
      csv
      lua
@@ -79,7 +80,8 @@ This function should only modify configuration layer settings."
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode
             )
-     cquery
+     (lsp-c-c++ :variables
+                cquery-sem-highlight-rainbow  t)
      ;; (cpp2 :variables
      ;;       c-c++-default-mode-for-headers 'c++-mode
      ;;       )
