@@ -93,10 +93,9 @@ This function should only modify configuration layer settings."
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
-     neotree
-     ;; treemacs
+     ;; neotree
+     treemacs
      ;; sr-speedbar
-     ;; ycmd
      ;; vim-extra
      )
 
@@ -520,8 +519,8 @@ before packages are loaded."
   ;; Treemacs
   ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
   ;; TODO: add to ignore file predicates to ignore pyc files
-  ;; (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
-  ;; (spacemacs/set-leader-keys "<escape>" 'treemacs)
+  (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
+  (spacemacs/set-leader-keys "<escape>" 'treemacs)
   (display-time-mode t)
   ;; (global-display-line-numbers-mode t)
   (advice-add 'gdb-display-buffer
