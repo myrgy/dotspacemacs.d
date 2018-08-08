@@ -502,8 +502,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                       :width normal
                       :powerline-scale 1)))
   (setq custom-file (concat (file-name-directory dotspacemacs-filepath) "customize.el"))
-  (load custom-file)
-  )
+  (load custom-file))
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -533,6 +532,13 @@ before packages are loaded."
 	            :around (lambda (orig-fun name &optional ignore-dedicated window)
 		                    (funcall orig-fun name ignore-dedicated window)
 		                    (set-window-dedicated-p window nil)))
+
+  ;; (use-package ansi-color
+  ;;   :config
+  ;;   (defun my-colorize-compilation-buffer ()
+  ;;     (when (eq major-mode 'compilation-mode)
+  ;;       (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  ;;   (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
