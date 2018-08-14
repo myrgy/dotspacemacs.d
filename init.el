@@ -539,6 +539,10 @@ before packages are loaded."
   ;;     (when (eq major-mode 'compilation-mode)
   ;;       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   ;;   (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
+  ;; (setq-default dotspacemacs-configuration-layers
+  ;;               '((org :variables org-projectile-file "TODOs.org")))
+  ;; (require 'org-projectile)
+  ;; (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
