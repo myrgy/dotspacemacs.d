@@ -80,8 +80,11 @@ This function should only modify configuration layer settings."
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode
             )
-     (lsp-c-c++ :variables
-                cquery-sem-highlight-rainbow  t)
+     ;; (lsp-c-c++ :variables cquery-sem-highlight-rainbow  t)
+     (lsp-c-c++ :variables ccls-sem-highlight-rainbow  t
+                ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t))
+                lsp-ui-sideline-enable nil
+               )
      ;; (cpp2 :variables
      ;;       c-c++-default-mode-for-headers 'c++-mode
      ;;       )
