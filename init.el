@@ -84,6 +84,7 @@ This function should only modify configuration layer settings."
      (lsp-c-c++ :variables ccls-sem-highlight-rainbow  t
                 ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t))
                 lsp-ui-sideline-enable nil
+                ccls-cache-dir ".cache"
                )
      ;; (cpp2 :variables
      ;;       c-c++-default-mode-for-headers 'c++-mode
