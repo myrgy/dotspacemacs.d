@@ -76,24 +76,15 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
+     (lsp :variables
+          lsp-ui-sideline-enable nil)
      (c-c++ :variables
-            c-c++-enable-clang-support t
-            c-c++-default-mode-for-headers 'c++-mode
-            )
-     ;; (lsp-c-c++ :variables cquery-sem-highlight-rainbow  t)
-     (lsp-c-c++ :variables ccls-sem-highlight-rainbow  t
-                ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t))
-                lsp-ui-sideline-enable nil
-                ccls-cache-dir ".cache"
-               )
-     ;; (cpp2 :variables
-     ;;       c-c++-default-mode-for-headers 'c++-mode
-     ;;       )
-
-     (cmake
-      ;; :variables cmake-enable-cmake-ide-support nil
-            )
-
+	    c-c++-backend 'lsp-ccls
+      c-c++-default-mode-for-headers 'c++-mode
+      c-c++-lsp-cache-dir ".cache"
+      c-c++-lsp-sem-highlight-method 'font-lock
+      c-c++-lsp-sem-highlight-rainbow t)
+     cmake
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
@@ -101,6 +92,7 @@ This function should only modify configuration layer settings."
      treemacs
      ;; sr-speedbar
      ;; vim-extra
+     multicompile
      )
 
    ;; List of additional packages that will be installed without being
