@@ -71,6 +71,7 @@ This function should only modify configuration layer settings."
      gpu
      org
      (shell :variables
+            shell-default-shell 'eshell
             shell-default-height 30
             shell-default-position 'bottom)
      spell-checking
@@ -82,6 +83,7 @@ This function should only modify configuration layer settings."
 	    c-c++-backend 'lsp-ccls
       c-c++-default-mode-for-headers 'c++-mode
       c-c++-lsp-cache-dir ".cache"
+      c-c++-lsp-extra-init-params '(:completion (:detailedLabel t))
       c-c++-lsp-sem-highlight-method 'font-lock
       c-c++-lsp-sem-highlight-rainbow t)
      cmake
@@ -92,7 +94,7 @@ This function should only modify configuration layer settings."
      treemacs
      ;; sr-speedbar
      ;; vim-extra
-     multicompile
+     multi-compile
      )
 
    ;; List of additional packages that will be installed without being
@@ -511,6 +513,7 @@ before packages are loaded."
   (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
 
   (custom-set-variables '(imenu-max-item-length 256))
+  (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t)))
   ;; Treemacs
   ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
   ;; TODO: add to ignore file predicates to ignore pyc files
