@@ -86,7 +86,7 @@ This function should only modify configuration layer settings."
       c-c++-lsp-extra-init-params '(:completion (:detailedLabel t))
       c-c++-lsp-sem-highlight-method 'font-lock
       c-c++-lsp-sem-highlight-rainbow t)
-     cmake
+     (cmake :variables cmake-enable-cmake-ide-support nil)
      (plantuml : variables
                org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
                )
@@ -515,7 +515,7 @@ before packages are loaded."
   (custom-set-variables '(imenu-max-item-length 256))
   (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t)))
   ;; Treemacs
-  ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to select treemacs
+  ;; Stop treemacs from messing up numbering. Bind SPC caps-lock (esc) to treemacs
   ;; TODO: add to ignore file predicates to ignore pyc files
   (add-to-list 'winum-ignored-buffers " *Treemacs-Framebuffer-1*")
   (spacemacs/set-leader-keys "<escape>" 'treemacs)
@@ -531,6 +531,13 @@ before packages are loaded."
 	            :around (lambda (orig-fun name &optional ignore-dedicated window)
 		                    (funcall orig-fun name ignore-dedicated window)
 		                    (set-window-dedicated-p window nil)))
+
+  ;; (require 'projectile)
+  ;; (projectile-register-project-type 'kg-cmake '("CMakeLists.txt")
+  ;;  :compilation-dir "build"
+  ;;  :configure '"cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCLANG_FORMAT_EXCLUDE_PATTERNS=/.cache/\\;/ci-build- %s"
+  ;;  :compile 'helm-make
+  ;;  :test 'helm-ctest)
 
   ;; (use-package ansi-color
   ;;   :config
