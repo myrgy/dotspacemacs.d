@@ -78,18 +78,19 @@ This function should only modify configuration layer settings."
      syntax-checking
      version-control
      (lsp :variables
+          lsp-ui-doc-enable t
           lsp-ui-sideline-enable nil)
      (c-c++ :variables
 	    c-c++-backend 'lsp-ccls
       c-c++-default-mode-for-headers 'c++-mode
       c-c++-lsp-cache-dir ".cache"
-      c-c++-lsp-extra-init-params '(:completion (:detailedLabel t))
+      c-c++-lsp-extra-init-params '(:completion (:detailedLabel t) :index (:comments 2))
       c-c++-lsp-sem-highlight-method 'font-lock
       c-c++-lsp-sem-highlight-rainbow t)
      (cmake :variables cmake-enable-cmake-ide-support nil)
-     (plantuml : variables
-               org-plantuml-jar-path "~/.spacemacs.d/plantuml.jar"
-               )
+     (plantuml :variables
+               plantuml-jar-path     "~/.spacemacs.d/bin/plantuml.jar"
+               org-plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
      ;; neotree
      treemacs
      ;; sr-speedbar
@@ -492,10 +493,10 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (if (string= (system-name) "sr-macbook-503")
+  (if (string= (system-name) "cm-adalshov-macbook")
       (setq-default dotspacemacs-default-font
                     '("Source Code Pro"
-                      :size 10.0
+                      :size 8.0
                       :weight normal
                       :width normal
                       :powerline-scale 1)))
@@ -510,7 +511,6 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq-default evil-escape-key-sequence "jk")
   (define-key evil-insert-state-map (kbd "<backtab>") 'company-complete)
-  (setq plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
 
   (custom-set-variables '(imenu-max-item-length 256))
   (setq ccls-extra-init-params '(:index (:comments 2) :completion (:detailedLabel t)))
