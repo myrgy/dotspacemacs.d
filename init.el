@@ -532,6 +532,10 @@ before packages are loaded."
 		                    (funcall orig-fun name ignore-dedicated window)
 		                    (set-window-dedicated-p window nil)))
 
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-enable-indentation nil)
+  (setq lsp-imenu-show-container-name t)
+
   ;; (require 'projectile)
   ;; (projectile-register-project-type 'kg-cmake '("CMakeLists.txt")
   ;;  :compilation-dir "build"
