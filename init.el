@@ -86,7 +86,7 @@ This function should only modify configuration layer settings."
       c-c++-lsp-cache-dir ".cache"
       c-c++-lsp-extra-init-params '(:completion (:detailedLabel t) :index (:comments 2))
       c-c++-lsp-sem-highlight-method 'font-lock
-      c-c++-lsp-sem-highlight-rainbow t)
+      c-c++-lsp-sem-highlight-rainbow nil)
      (cmake :variables cmake-enable-cmake-ide-support nil)
      (plantuml :variables
                plantuml-jar-path     "~/.spacemacs.d/bin/plantuml.jar"
@@ -96,6 +96,9 @@ This function should only modify configuration layer settings."
      ;; sr-speedbar
      ;; vim-extra
      multi-compile
+     notmuch
+     ;;
+     colors
      )
 
    ;; List of additional packages that will be installed without being
@@ -535,6 +538,17 @@ before packages are loaded."
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-enable-indentation nil)
   (setq lsp-imenu-show-container-name t)
+
+  (setq display-time-world-list
+        '(
+          ("America/New_York" "New York")
+          ("America/Chicago" "Chicago")
+          ("UTC" "UTC")
+          ("Europe/Minsk" "Minsk")
+          ("Asia/Changpai" "Changpai")
+          ("Asia/Tokyo" "Tokyo")
+          ("Australia/Sydney" "Sydney")
+          ))
 
   ;; (require 'projectile)
   ;; (projectile-register-project-type 'kg-cmake '("CMakeLists.txt")
