@@ -540,9 +540,10 @@ before packages are loaded."
   (setq lsp-imenu-show-container-name t)
 
   (setq display-time-world-list
-        '(
+        '(;; /usr/share/zoneinfo
           ("America/New_York" "New York")
           ("America/Chicago" "Chicago")
+          ("US/Central" "CDT (UTC -5)")
           ("UTC" "UTC")
           ("Europe/Minsk" "Minsk")
           ("Asia/Changpai" "Changpai")
