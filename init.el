@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(ansible
      shell-scripts
      sql
      csv
@@ -91,6 +91,7 @@ This function should only modify configuration layer settings."
      (plantuml :variables
                plantuml-jar-path     "~/.spacemacs.d/bin/plantuml.jar"
                org-plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
+     haskell
      ;; neotree
      treemacs
      ;; sr-speedbar
