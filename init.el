@@ -91,7 +91,9 @@ This function should only modify configuration layer settings."
      (plantuml :variables
                plantuml-jar-path     "~/.spacemacs.d/bin/plantuml.jar"
                org-plantuml-jar-path "~/.spacemacs.d/bin/plantuml.jar")
-     haskell
+     (haskell :variables
+              haskell-completion-backend 'lsp
+              haskell-enable-hindent t)
      ;; neotree
      treemacs
      ;; sr-speedbar
@@ -150,7 +152,7 @@ It should only modify the values of Spacemacs settings."
    ;; To load it when starting Emacs add the parameter `--dump-file'
    ;; when invoking Emacs 27.1 executable on the command line, for instance:
    ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
-   ;; (default spacemacs.pdmp)
+   ;; (default spacemacs.pdmep)
    dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
 
    ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
@@ -539,6 +541,7 @@ before packages are loaded."
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-enable-indentation nil)
   (setq lsp-imenu-show-container-name t)
+  (setq lsp-haskell-process-path-hie "/home/adalshov/.local/bin/hie-8.2")
 
   (setq display-time-world-list
         '(;; /usr/share/zoneinfo
